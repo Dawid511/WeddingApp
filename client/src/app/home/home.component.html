@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div style="text-align: center;">
+
+        @if (!registerMode){
+            <h1>Zaplanuj swoje wesele!</h1>
+            <p class="lead">Spraw by ten dzień był niezwykły i dopracowany w każdym aspekcie! Załóż konto, aby odkryć wszystkie funkcje.</p>    
+            <div class="text-center">
+                <button (click)="registerToddle()" class="btn btn-primary btn-lg me-2">Zarejestruj się</button>
+                <button class="btn btn-info btn-lg me-2">Przeglądaj usługi</button>
+            </div>
+        } @else {
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <app-register 
+                        [usersFromHomeComponent]="users"
+                        (cancelRegister)="cancelRegisterMode($event)"
+                        ></app-register>
+                    </div>
+                </div>
+            </div>
+        } 
+
+       
+    </div>
+</div>
