@@ -1,0 +1,36 @@
+.homepage-wrapper {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #4fae9e, #e2f7ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .overlay {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    width: 100%;
+  }
+  
+  
+  .carousel-img {
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  
+  .fade-in {
+    animation: fadeIn 1.2s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
