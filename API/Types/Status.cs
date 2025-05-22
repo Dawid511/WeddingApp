@@ -1,8 +1,7 @@
 namespace API.Types;
-public enum RSVPStatus
+public enum Status
 {
     Yes,
     No,
-    Maybe,
-    Pending
+    Invited
 }

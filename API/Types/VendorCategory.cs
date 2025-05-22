@@ -2,11 +2,11 @@ namespace API.Types;
 
 public enum VendorCategory
 {
-    Venue,
+    venue,
     Catering,
     Photographer,
     Florist,
     DJ,
     Decorator,
-    Planner
+    clothes
 }

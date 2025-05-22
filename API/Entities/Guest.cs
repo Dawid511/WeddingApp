@@ -12,6 +12,6 @@ public class Guest
     public string? Email { get; set; }
     public string? PhoneNumber { get; set; }
 
-    public RSVPStatus RSVP { get; set; } = RSVPStatus.Pending;
+    public Status pendingStatus { get; set; } = Status.Invited;
     public string? Notes { get; set; }
 }
