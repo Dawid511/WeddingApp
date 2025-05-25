@@ -13,10 +13,7 @@ public class Vendor
     public string? WebsiteUrl { get; set; }
     public string? Phone { get; set; }
     public string? Email { get; set; }
-
+    public List<Photo> Photos { get; set; } = [];
     public ICollection<WeddingVendor> AssignedToWeddings { get; set; } = new List<WeddingVendor>();
-}
 
-public class WeddingVendor
-{
 }
