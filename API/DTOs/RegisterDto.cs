@@ -15,7 +15,7 @@ namespace API.DTOs
         public string Password { get; set; } = string.Empty;
 
         [Required]
-        public string Role { get; set; } = "Organizer"; // Default if needed
+        public string Role { get; set; } = "User";
 
         [Required]
         public DateOnly DateOfBirth { get; set; }
