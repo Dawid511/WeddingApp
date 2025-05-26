@@ -12,51 +12,28 @@
     margin-bottom: 20px;
   }
   
-  .guests-input {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .guests-input input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #e0cba8;
-    border-radius: 6px;
-  }
-
-  .task-row {
-  display: flex;
-  align-items: center;
+ .input-group {
+  display: flex;      
   gap: 10px;
-  flex-wrap: nowrap;
+  margin-bottom: 20px;
 }
 
-.task-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Pole imienia i nazwiska */
+.name-input {
   flex: 1;
-  min-width: 0;
-  word-break: break-word;
+  padding: 10px;
+  border: 1px solid #e0cba8;
+  border-radius: 6px;
 }
 
-.task-actions {
-  display: flex;
-  gap: 8px;
-  margin-left: auto; /* 🚀 kluczowy element: wypycha przyciski na koniec */
-}
-.task-edit {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Pole liczby gości */
+.guest-count-input {
+  max-width: 60px;
+  padding: 10px;
+  border: 1px solid #e0cba8;
+  border-radius: 6px;
 }
 
-.edit-input {
-  flex: 1;
-  min-width: 0;
-}
-  
   ul {
     list-style: none;
     padding: 0;
