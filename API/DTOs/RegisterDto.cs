@@ -9,10 +9,15 @@ namespace API.DTOs
     public class RegisterDto
     {
         [Required]
-        public required string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required]
-        public required string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
+        [Required]
+        public string Role { get; set; } = "Organizer"; // Default if needed
+
+        [Required]
+        public DateOnly DateOfBirth { get; set; }
     }
 }

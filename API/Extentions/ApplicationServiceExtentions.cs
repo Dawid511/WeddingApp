@@ -16,6 +16,10 @@ public static class ApplicationServiceExtentions
         });
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<GuestService>();
+        services.AddScoped<GuestListService>();
+        services.AddScoped<WeddingService>();
+
         return services;
     }
 }

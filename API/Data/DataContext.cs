@@ -9,6 +9,8 @@ public class DataContext(DbContextOptions options) : DbContext(options)
     public DbSet<AppUser> Users { get; set; }
     public DbSet<Wedding> Weddings { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
+    public DbSet<Guest> Guests { get; set; } = null!;
+    public DbSet<GuestList> GuestLists { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
