@@ -1,0 +1,63 @@
+[
+    {
+  "id": 1,
+  "userName": "anna.wedding",
+  "role": "User",
+  "passwordHash": "AAEC",
+  "passwordSalt": "BBEC",
+  "dateofBirth": "1995-06-15",
+  "created": "2024-11-01T12:00:00Z",
+  "lastActive": "2025-05-23T14:30:00Z",
+  "wedding": null
+},
+{
+  "id": 2,
+  "userName": "vendor_photo",
+  "role": "Vendor",
+  "passwordHash": "CCDD",
+  "passwordSalt": "DDEE",
+  "dateofBirth": "1988-03-10",
+  "created": "2024-10-05T09:00:00Z",
+  "lastActive": "2025-05-22T16:00:00Z",
+  "wedding": null
+},
+{
+  "id": 3,
+  "userName": "michal.decor",
+  "role": "Vendor",
+  "passwordHash": "EEDD",
+  "passwordSalt": "FFGG",
+  "dateofBirth": "1990-12-22",
+  "created": "2024-12-10T08:15:00Z",
+  "lastActive": "2025-05-21T11:00:00Z",
+  "wedding": null
+},
+{
+  "id": 4,
+  "userName": "karolina.manager",
+  "role": "User",
+  "passwordHash": "AABB",
+  "passwordSalt": "CCDD",
+  "dateofBirth": "1992-01-05",
+  "created": "2025-01-15T10:45:00Z",
+  "lastActive": "2025-05-23T08:00:00Z",
+  "wedding": null
+},
+{
+  "id": 5,
+  "userName": "pawel.bridegroom",
+  "role": "User",
+  "passwordHash": "ZZYY",
+  "passwordSalt": "XXWW",
+  "dateofBirth": "1993-09-09",
+  "created": "2025-02-20T07:00:00Z",
+  "lastActive": "2025-05-22T20:00:00Z",
+  "wedding": null
+}
+
+
+
+
+
+
+]
