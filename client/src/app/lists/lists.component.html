@@ -1,1 +1,18 @@
-<p>lists works!</p>
+<div class="guest-card">
+  <h2>Lista gości</h2>
+
+  <div class="guest-inputs">
+    <input type="text" class="form-control" [(ngModel)]="newGuestName" placeholder="Wpisz imię i nazwisko...">
+    <select class="form-select" [(ngModel)]="newGuestStatus">
+      <option [value]="true">Zaproszony</option>
+      <option [value]="false">Nie zaproszony</option>
+    </select>
+    <button class="btn btn-warning" (click)="addGuest()">Dodaj</button>
+  </div>
+
+  <ul class="guest-list">
+    <li *ngFor="let guest of guestList">
+      {{ guest.name }} – <strong>{{ guest.invited ? 'Tak' : 'Nie' }}</strong>
+    </li>
+  </ul>
+</div>

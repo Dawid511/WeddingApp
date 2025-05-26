@@ -1,14 +1,22 @@
 <div class="homepage-wrapper">
   <div class="overlay">
-    <div class="container mt-5 text-center fade-in">
+    <div class="container mt-3 text-center fade-in">
       @if (!registerMode){
-        <h1 class="display-4 text-white">Zaplanuj swoje wesele!</h1>
-        <p class="lead text-light">Spraw by ten dzień był niezwykły i dopracowany w każdym aspekcie! Załóż konto, aby odkryć wszystkie funkcje.</p>    
+        <div class="item-image">
+         <img src="icons/wedding-bells.png" width="150" height="150">
+        </div>
+        <h1 class="display-4 text-dark">Zaplanuj swoje wesele!</h1>
+        <p class="lead text-dark">Spraw by ten dzień był niezwykły i dopracowany w każdym aspekcie! Załóż konto, aby odkryć wszystkie funkcje.</p>    
         
         <div class="mb-4">
-          <button (click)="registerToddle()" class="btn btn-primary btn-lg me-2">Zarejestruj się</button>
-          <button class="btn btn-primary btn-lg">Przeglądaj usługi</button>
-        </div>
+          @if (!accountService.currentUser()){
+          <button (click)="registerToddle()" class="btn btn-secondary btn-lg me-2">Zarejestruj się</button>
+          }
+          <button class="btn btn-outline-warning btn-lg"
+        routerLink="/members/member-list"
+        routerLinkActive="active"
+        type="button">Przeglądaj usługi</button>
+          </div>
 
         <div id="carouselExampleCaptions" class="carousel slide rounded shadow-lg" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -48,6 +56,37 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+        <br>
+      <div id="tooltip-section">
+  <div class="item-with-icon">
+    <div class="item-image">
+      <img src="icons/wedding-couple.png" alt="Para młoda" width="70" height="70">
+    </div>
+    <div>Uniknij weselnych wpadek</div>
+  </div>
+  <div class="item-with-icon">
+    <div class="item-image">
+      <img src="icons/search.png" alt="Serce" width="70" height="70">
+    </div>
+    <div>Miej wszystko pod kontrolą</div>
+  </div>
+  <div class="item-with-icon">
+    <div class="item-image">
+      <img src="icons/dating-app.png" alt="Wiadomości" width="66" height="70">
+    </div>
+    <div>Bądź na bieżąco ze ślubnymi trendami</div>
+  </div>
+  <div class="item-with-icon">
+    <div class="item-image">
+      <img src="icons/calendar.png" alt="Kalendarz" width="66" height="70">
+    </div>
+    <div>Planuj wtedy, kiedy chcesz</div>
+  </div>
+</div>
+<br>
+<div class="clearfix line-overflow">
+      <h2 class="text-dark">Zorganizuj swoje wesele krok po kroku!</h2>
+    </div>
       } @else {
         <div class="container">
           <div class="row justify-content-center">

@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavComponent } from "./nav/nav.component";
 import { AccountService } from './_services/account.service';
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavComponent],
+  imports: [RouterOutlet, NavComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -14,7 +15,7 @@ import { AccountService } from './_services/account.service';
 export class AppComponent implements OnInit {
 
   private accountService = inject(AccountService);
-  title = 'YourWedding';
+  title = 'WeddingPlanner';
   
 
   ngOnInit(): void {
