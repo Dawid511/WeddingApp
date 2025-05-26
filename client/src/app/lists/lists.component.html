@@ -1,1 +1,23 @@
-<p>lists works!</p>
+<div class="guest-card">
+  <h2 class="text-dark">Lista gości</h2>
+  <div class="text-center my-3">
+  <span class="text-dark">Liczba osób: {{ totalGuestCount() }}</span>
+</div>
+ <div class="input-group">
+  <input type="text" [(ngModel)]="newGuestName" placeholder="Imię i nazwisko..." class="form-control name-input me-2">
+  <input type="number" [(ngModel)]="newGuestCount" min="1" class="form-control guest-count-input me-2" placeholder="Ilość">
+  <button class="btn btn-warning" type="button" (click)="addGuest()">Dodaj</button>
+</div>
+
+  <ul class="guest-list list-group mt-3">
+    <li *ngFor="let guest of guestList">
+      <div>
+        <strong>{{ guest.name }}</strong>
+        Zaproszony: 
+        <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.invited">
+        Potwierdzenie: 
+        <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.confirmed">
+      </div>
+    </li>
+  </ul>
+</div>

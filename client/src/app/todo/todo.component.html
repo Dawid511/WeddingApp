@@ -1,1 +1,28 @@
-<p>todo works!</p>
+<div class="todo-card">
+  <h2 class="text-dark">Lista zadań</h2>
+
+  <div class="input-group mb-3">
+    <input type="text" [(ngModel)]="newTask" placeholder="Nowe zadanie..." class="form-control me-2">
+    <button class="btn btn-warning" type="submit" (click)="addTask()">Dodaj</button>
+  </div>
+
+  <ul class="list-group">
+    <li *ngFor="let task of tasks; let i = index">
+  <div *ngIf="!task.editing" class="task-row">
+    <div class="task-left">
+      <input class="form-check-input beige-checkbox" type="checkbox">
+      <span>{{ task.text }}</span>
+    </div>
+    <div class="task-actions">
+      <button class="btn btn-sm btn-warning" (click)="editTask(i)">Edytuj</button>
+      <button class="btn btn-sm btn-outline-warning" (click)="deleteTask(i)">Usuń</button>
+    </div>
+  </div>
+
+  <div *ngIf="task.editing" class="task-edit">
+    <input [(ngModel)]="task.text" class="form-control edit-input">
+    <button class="btn btn-sm btn-warning" (click)="saveTask(i, task.text)">Zapisz</button>
+  </div>
+</li>
+  </ul>
+</div>
