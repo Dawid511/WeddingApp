@@ -19,6 +19,14 @@ public static class ApplicationServiceExtentions
         services.AddScoped<GuestService>();
         services.AddScoped<GuestListService>();
         services.AddScoped<WeddingService>();
+        services.AddScoped<ExpenseItemService>();
+        services.AddScoped<ExpenseListService>();
+        services.AddScoped<VendorService>();
+        services.AddScoped<PhotoService>();
+        services.AddScoped<ToDoTaskService>();
+        services.AddScoped<ToDoListService>();
+
+
 
         return services;
     }
