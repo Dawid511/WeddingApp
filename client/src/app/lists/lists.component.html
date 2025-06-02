@@ -10,14 +10,24 @@
 </div>
 
   <ul class="guest-list list-group mt-3">
-    <li *ngFor="let guest of guestList">
-      <div>
+    <li *ngFor="let guest of guestList; let i = index">
+      <div *ngIf="!guest.editing" class="guest-row">
+    <div class="guest-left">
         <strong>{{ guest.name }}</strong>
         Zaproszony: 
         <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.invited">
         Potwierdzenie: 
         <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.confirmed">
-      </div>
+    </div>
+    <div class="guest-actions"> 
+      <button class="btn btn-sm btn-warning" (click)="editGuestList(i)">Edytuj</button>
+      <button class="btn btn-sm btn-outline-warning" (click)="deleteGuestList(i)">Usuń</button>
+    </div>
+</div>
+    <div *ngIf="guest.editing" class="guest-edit">
+    <input [(ngModel)]="guest.name" class="form-control edit-input">
+    <button class="btn btn-sm btn-warning" (click)="saveGuestList(i, guest.name)">Zapisz</button>
+  </div>
     </li>
   </ul>
 </div>
