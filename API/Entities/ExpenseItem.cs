@@ -1,10 +1,10 @@
 namespace API.Entities;
 
 
-public class ExpenseItem
+public class ExpenseItem    // single expense
 {
     public int Id { get; set; }
-    public int ExpenseListId { get; set; }
+    public int ExpenseListId { get; set; }  // relation with list 1 to many
     public ExpenseList ExpenseList { get; set; } = null!;
 
     public required string Name { get; set; }  // np. "Fotograf", "Sala"

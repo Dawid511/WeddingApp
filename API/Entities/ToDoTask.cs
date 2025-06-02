@@ -1,6 +1,6 @@
 namespace API.Entities;
 
-public class ToDoTask
+public class ToDoTask   // single to do task
 {
     public int Id { get; set; }
 

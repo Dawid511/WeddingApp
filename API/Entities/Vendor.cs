@@ -1,7 +1,7 @@
 namespace API.Entities;
 using API.Types;
 
-public class Vendor
+public class Vendor // informations about single vendor
 {
     public int Id { get; set; }
     public int AppUserId { get; set; }

@@ -1,5 +1,6 @@
 namespace API.Entities;
-public class GuestList
+
+public class GuestList  // Whole guest list for weeding
 {
     public int Id { get; set; }
 

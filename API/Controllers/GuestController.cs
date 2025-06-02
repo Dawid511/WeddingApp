@@ -24,6 +24,7 @@ public class GuestsController(GuestService guestService) : ControllerBase
             FullName = g.FullName,
             Email = g.Email,
             PhoneNumber = g.PhoneNumber,
+            Count = g.Count,
             Notes = g.Notes,
             Status = g.pendingStatus.ToString()
         }).ToList();
@@ -44,6 +45,7 @@ public class GuestsController(GuestService guestService) : ControllerBase
             FullName = guest.FullName,
             Email = guest.Email,
             PhoneNumber = guest.PhoneNumber,
+            Count = guest.Count,
             Notes = guest.Notes,
             Status = guest.pendingStatus.ToString()
         };
@@ -60,6 +62,7 @@ public class GuestsController(GuestService guestService) : ControllerBase
             FullName = dto.FullName,
             Email = dto.Email,
             PhoneNumber = dto.PhoneNumber,
+            Count = dto.Count,
             Notes = dto.Notes
         };
 
@@ -72,6 +75,7 @@ public class GuestsController(GuestService guestService) : ControllerBase
             FullName = added.FullName,
             Email = added.Email,
             PhoneNumber = added.PhoneNumber,
+            Count = added.Count,
             Notes = added.Notes,
             Status = added.pendingStatus.ToString()
         });
@@ -86,6 +90,7 @@ public class GuestsController(GuestService guestService) : ControllerBase
         if (dto.FullName is not null) guest.FullName = dto.FullName;
         if (dto.Email is not null) guest.Email = dto.Email;
         if (dto.PhoneNumber is not null) guest.PhoneNumber = dto.PhoneNumber;
+        if (dto.Count is not null) guest.Count = dto.Count.Value;
         if (dto.Notes is not null) guest.Notes = dto.Notes;
         if (dto.Status is not null && Enum.TryParse(dto.Status, out Status status))
             guest.pendingStatus = status;
