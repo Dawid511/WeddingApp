@@ -1,7 +1,7 @@
 namespace API.Entities;
 using API.Types;
 
-public class Wedding
+public class Wedding    // main information about wedding
 {
     public int Id { get; set; }
     public int AppUserId { get; set; }

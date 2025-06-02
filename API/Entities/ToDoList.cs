@@ -1,6 +1,6 @@
 namespace API.Entities;
 
-public class ToDoList
+public class ToDoList // List of todos for single wedding
 {
     public int Id { get; set; }
 
