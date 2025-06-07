@@ -52,7 +52,7 @@ public class VendorsController(VendorService vendorService) : ControllerBase
         });
     }
 
-    [Authorize(Roles = "Vendor")]
+    // [Authorize(Roles = "Vendor")]
     [HttpPost]
     public async Task<ActionResult<VendorDto>> CreateVendor(CreateVendorDto dto)
     {

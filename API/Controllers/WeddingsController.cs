@@ -46,7 +46,7 @@ public class WeddingsController(WeddingService weddingService) : ControllerBase
         });
     }
 
-    [Authorize(Roles = "User")]
+    // [Authorize(Roles = "User")]
     [HttpPost]
     public async Task<ActionResult<WeddingDto>> Create(CreateWeddingDto dto)
     {
