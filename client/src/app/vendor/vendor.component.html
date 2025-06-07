@@ -1,0 +1,24 @@
+<div class="vendor-container">
+  <h2 class="card-header text-dark">Lista Dostawców</h2>
+
+  <div *ngIf="vendors.length === 0">
+    <p>Brak dostawców do wyświetlenia.</p>
+  </div>
+
+  <div *ngFor="let vendor of vendors" class="card-inspo">
+    <div class="vendor-content">
+      <h3>{{ vendor.companyName }}</h3>
+      <p><strong>Kategoria:</strong> {{ vendor.category }}</p>
+      <p *ngIf="vendor.description"><strong>Opis:</strong> {{ vendor.description }}</p>
+      <p *ngIf="vendor.phone"><strong>Telefon:</strong> {{ vendor.phone }}</p>
+      <p *ngIf="vendor.email">
+        <strong>Email:</strong>
+        <a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a>
+      </p>
+      <p *ngIf="vendor.websiteUrl">
+        <strong>Strona:</strong>
+        <a href="{{ vendor.websiteUrl }}" target="_blank">{{ vendor.websiteUrl }}</a>
+      </p>
+    </div>
+  </div>
+</div>

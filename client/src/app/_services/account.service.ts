@@ -35,6 +35,18 @@ export class AccountService {
     )
   }
 
+  updateUserRole(userId: number, role: string) {
+  return this.http.put<User>(this.baseUrl + 'account/set-role', { userId, role }).pipe(
+    map(user => {
+      if(user){
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUser.set(user);
+      }
+      return user;
+    })
+  );
+}
+
   logout(){
     localStorage.removeItem('user');
     this.currentUser.set(null);

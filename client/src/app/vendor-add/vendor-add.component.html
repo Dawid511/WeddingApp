@@ -1,0 +1,42 @@
+<div class="card-inspo">
+  <h2 class="card-header">Dodaj usługę</h2>
+
+  <form #f="ngForm" (ngSubmit)="addVendor()">
+
+    <div class="form-group">
+    <label for="category">Kategoria *</label>
+<select [(ngModel)]="model.category" name="category" id="category" required>
+  <option value="" disabled selected>Wybierz kategorię</option>
+  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+</select> </div>
+
+    <div class="form-group">
+      <label>Nazwa firmy *</label>
+      <input type="text" name="companyName" [(ngModel)]="model.companyName" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Opis</label>
+      <textarea name="description" [(ngModel)]="model.description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Strona WWW</label>
+      <input type="url" name="websiteUrl" [(ngModel)]="model.websiteUrl" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Telefon</label>
+      <input type="text" name="phone" [(ngModel)]="model.phone" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="model.email" class="form-control" />
+    </div>
+<div>   
+    <button type="submit" class="btn btn-sm btn-warning me-2" [disabled]="f.invalid">Dodaj</button>
+    <button type="button" class="btn btn-sm btn-outline-warning" (click)="cancel()">Anuluj</button>
+  </div>
+ </form>
+</div>
