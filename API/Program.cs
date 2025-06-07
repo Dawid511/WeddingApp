@@ -25,12 +25,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseCors(x =>
+    x.AllowAnyHeader()
+     .AllowAnyMethod()
+     .WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();

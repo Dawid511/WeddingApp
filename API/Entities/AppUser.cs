@@ -8,7 +8,7 @@ public class AppUser
 {
     public int Id { get; set; }
     public required string UserName { get; set; }
-    public required UserRole Role { get; set; }
+    public UserRole? Role { get; set; } // nullable
     public byte[] PasswordHash { get; set; } = [];
     public byte[] PasswordSalt { get; set; } = [];
 

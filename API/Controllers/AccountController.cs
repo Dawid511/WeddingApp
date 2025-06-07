@@ -5,6 +5,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using API.Types;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +29,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         var user = new AppUser
         {
             UserName = dto.Username,
-            Role = Enum.Parse<UserRole>(dto.Role, true),
+            Role = null,
             DateofBirth = dto.DateOfBirth,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password)),
             PasswordSalt = hmac.Key
@@ -41,7 +42,7 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         {
             Id = user.Id,
             Username = user.UserName,
-            Role = user.Role.ToString(),
+            Role = null,
             Age = user.GetAge(),
             Token = _tokenService.CreateToken(user)
         };
@@ -68,9 +69,55 @@ public class AccountController(DataContext context, ITokenService tokenService) 
         {
             Id = user.Id,
             Username = user.UserName,
-            Role = user.Role.ToString(),
+            Role = user.Role?.ToString(),
             Age = user.GetAge(),
             Token = _tokenService.CreateToken(user)
         };
     }
+
+    [Authorize]
+    [HttpPost("set-role")]
+    public async Task<ActionResult> SetRole(SetRoleDto dto)
+    {
+        var id = User.FindFirst("id")?.Value;
+        if (string.IsNullOrEmpty(id)) return Unauthorized();
+
+        var user = await _context.Users.FindAsync(int.Parse(id));
+        if (user == null) return Unauthorized();
+
+        if (user == null)
+            return NotFound("User not found");
+
+        if (user.Role != null)
+            return BadRequest("Role has already been set.");
+
+        if (!Enum.TryParse<UserRole>(dto.Role, true, out var parsedRole))
+            return BadRequest("Invalid role");
+
+        user.Role = parsedRole;
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [Authorize]
+    [HttpGet("me")]
+    public async Task<ActionResult<UserDto>> GetCurrentUser()
+    {
+        var id = User.FindFirst("id")?.Value;
+        if (string.IsNullOrEmpty(id)) return Unauthorized();
+
+        var user = await _context.Users.FindAsync(int.Parse(id));
+        if (user == null) return Unauthorized();
+
+        return new UserDto
+        {
+            Id = user.Id,
+            Username = user.UserName,
+            Role = user.Role?.ToString(),
+            Age = user.GetAge()
+        };
+    }
+
+
 }

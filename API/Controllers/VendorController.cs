@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Entities;
 using API.Services;
 using API.Types;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -51,15 +52,18 @@ public class VendorsController(VendorService vendorService) : ControllerBase
         });
     }
 
+    [Authorize(Roles = "Vendor")]
     [HttpPost]
-    public async Task<ActionResult<VendorDto>> Create(CreateVendorDto dto)
+    public async Task<ActionResult<VendorDto>> CreateVendor(CreateVendorDto dto)
     {
+        var userId = int.Parse(User.FindFirst("id")!.Value);
+
         if (!Enum.TryParse<VendorCategory>(dto.Category, true, out var category))
-            return BadRequest("Invalid category");
+            return BadRequest("Wrong category");
 
         var vendor = new Vendor
         {
-            AppUserId = dto.AppUserId,
+            AppUserId = userId,
             Category = category,
             CompanyName = dto.CompanyName,
             Description = dto.Description,
@@ -82,6 +86,7 @@ public class VendorsController(VendorService vendorService) : ControllerBase
             Email = created.Email
         });
     }
+
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
