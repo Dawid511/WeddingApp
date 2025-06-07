@@ -33,6 +33,13 @@ public class WeddingService(DataContext context)
         return wedding;
     }
 
+    public async Task<bool> UpdateAsync(Wedding wedding)
+    {
+        _context.Weddings.Update(wedding);
+        var result = await _context.SaveChangesAsync();
+        return result > 0;
+    }
+
     public async Task<bool> DeleteAsync(int id)
     {
         var wedding = await _context.Weddings.FindAsync(id);

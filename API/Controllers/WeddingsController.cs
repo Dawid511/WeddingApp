@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -45,12 +46,15 @@ public class WeddingsController(WeddingService weddingService) : ControllerBase
         });
     }
 
+    [Authorize(Roles = "User")]
     [HttpPost]
     public async Task<ActionResult<WeddingDto>> Create(CreateWeddingDto dto)
     {
+        var userId = int.Parse(User.FindFirst("id")!.Value);
+
         var wedding = new Wedding
         {
-            AppUserId = dto.AppUserId,
+            AppUserId = userId,
             Title = dto.Title,
             WeddingDate = dto.WeddingDate,
             Location = dto.Location
@@ -68,6 +72,22 @@ public class WeddingsController(WeddingService weddingService) : ControllerBase
             CreatedAt = created.CreatedAt
         });
     }
+
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, UpdateWeddingDto dto)
+    {
+        var existing = await _weddingService.GetByIdAsync(id);
+        if (existing == null) return NotFound();
+
+        existing.Title = dto.Title ?? existing.Title;
+        existing.WeddingDate = dto.WeddingDate ?? existing.WeddingDate;
+        existing.Location = dto.Location ?? existing.Location;
+
+        var updated = await _weddingService.UpdateAsync(existing);
+        return updated ? NoContent() : StatusCode(500);
+    }
+
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)

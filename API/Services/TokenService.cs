@@ -20,12 +20,19 @@ namespace API.Services
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
             var claims = new List<Claim>{
+                new Claim("id", user.Id.ToString()),
                 new(ClaimTypes.NameIdentifier, user.UserName)
             };
 
+            if (user.Role is not null)
+            {
+                claims.Add(new(ClaimTypes.Role, user.Role.ToString()!)); // adding role to token
+            }
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor = new SecurityTokenDescriptor{
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = creds
