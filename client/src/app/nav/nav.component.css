@@ -36,3 +36,36 @@
     color: #000;
   }
   
+  .icon-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon-button:focus,
+.icon-button:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.icon-button img {
+  width: 32px;
+  height: 32px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:hover img {
+  transform: scale(1.1);
+}
+.login-wrapper {
+  position: relative;
+}
+
+.login-form-container {
+  position: absolute;
+  top: 40px; /* pod ikoną */
+  right: 0;
+  z-index: 1000;
+}

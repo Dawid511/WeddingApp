@@ -8,5 +8,6 @@ export interface Member {
     introduction: string
     city: string
     photos: Photo[]
+
 }
 

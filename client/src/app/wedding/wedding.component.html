@@ -1,0 +1,48 @@
+<div class="wedding-form">
+  <h2>Utwórz / Edytuj Wesele</h2>
+  
+  <form (ngSubmit)="createWedding()" #weddingForm="ngForm">
+    <div>
+      <label for="title">Tytuł wesela</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        [(ngModel)]="model.title"
+        required
+        #title="ngModel"
+      />
+      <div *ngIf="title.invalid && title.touched" class="error">
+        Tytuł jest wymagany
+      </div>
+    </div>
+
+    <div>
+      <label for="weddingDate">Data wesela</label>
+      <input
+        id="weddingDate"
+        name="weddingDate"
+        type="date"
+        [(ngModel)]="model.weddingDate"
+        required
+        #weddingDate="ngModel"
+      />
+      <div *ngIf="weddingDate.invalid && weddingDate.touched" class="error">
+        Data wesela jest wymagana
+      </div>
+    </div>
+
+    <div>
+      <label for="location">Lokalizacja (opcjonalnie)</label>
+      <input
+        id="location"
+        name="location"
+        type="text"
+        [(ngModel)]="model.location"
+      />
+    </div>
+
+    <button type="submit" [disabled]="weddingForm.invalid">Zapisz wesele</button>
+    <button type="button" (click)="cancel()">Anuluj</button>
+  </form>
+</div>

@@ -1,4 +1,8 @@
+export type UserRole = 'User' | 'Vendor' | 'Admin';
+
 export interface User {
-    username: string;
-    token: string;
+  id: number;
+  username: string;
+  token: string;
+  role: UserRole;
 }

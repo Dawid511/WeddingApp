@@ -11,12 +11,7 @@
         <div class="mb-4">
           @if (!accountService.currentUser()){
           <button (click)="registerToddle()" class="btn btn-secondary btn-lg me-2">Zarejestruj się</button>
-          }
-          <button class="btn btn-outline-warning btn-lg"
-        routerLink="/members/member-list"
-        routerLinkActive="active"
-        type="button">Przeglądaj usługi</button>
-          </div>
+          }</div>
 
         <div id="carouselExampleCaptions" class="carousel slide rounded shadow-lg" data-bs-ride="carousel">
           <div class="carousel-indicators">
@@ -57,6 +52,7 @@
           </button>
         </div>
         <br>
+        <br>
       <div id="tooltip-section">
   <div class="item-with-icon">
     <div class="item-image">
@@ -86,7 +82,33 @@
 <br>
 <div class="clearfix line-overflow">
       <h2 class="text-dark">Zorganizuj swoje wesele krok po kroku!</h2>
+</div>
+<div class="card-group-container">
+  <div class="card-option">
+    <img src="images/lists.jpg" class="card-img-top" alt="Lista gości">
+    <div class="card-body">
+      <h5 class="card-title">Lista gości</h5>
+      <p class="card-text">Możesz dodać swoich gości weselnych i zaznaczać potwierdzenia.</p>
     </div>
+  </div>
+
+  <div class="card-option">
+    <img src="images/tasks.jpeg" class="card-img-top" alt="Zadania">
+    <div class="card-body">
+         <h5 class="card-title">Lista zadań</h5>
+      <p class="card-text">Skorzystaj z listy zadań, aby lepiej zaplanować przygotowania do wesela.</p>
+    </div>
+  </div>
+
+  <div class="card-option">
+    <img src="images/fotograf.jpg" class="card-img-top" alt="Usługi weselne">
+    <div class="card-body">
+      <h5 class="card-title">Wybierz usługi</h5>
+      <p class="card-text">Znajdź i dodaj usługodawców do swojego wesela w kilku krokach.</p>
+    </div>
+  </div>
+</div>
+
       } @else {
         <div class="container">
           <div class="row justify-content-center">

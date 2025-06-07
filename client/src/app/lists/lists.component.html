@@ -1,33 +1,133 @@
-<div class="guest-card">
+<!-- <div class="guest-card">
   <h2 class="text-dark">Lista gości</h2>
+
   <div class="text-center my-3">
-  <span class="text-dark">Liczba osób: {{ totalGuestCount() }}</span>
-</div>
- <div class="input-group">
-  <input type="text" [(ngModel)]="newGuestName" placeholder="Imię i nazwisko..." class="form-control name-input me-2">
-  <input type="number" [(ngModel)]="newGuestCount" min="1" class="form-control guest-count-input me-2" placeholder="Ilość">
-  <button class="btn btn-warning" type="button" (click)="addGuest()">Dodaj</button>
-</div>
+    <span class="text-dark">Liczba osób: {{ totalGuestCount() }}</span>
+  </div>
+
+  <div class="input-group">
+    <input type="text" [(ngModel)]="newGuestName" placeholder="Imię i nazwisko..." class="form-control name-input me-2">
+    <input type="number" [(ngModel)]="newGuestCount" min="1" class="form-control guest-count-input me-2" placeholder="Ilość">
+    <button class="btn btn-warning" type="button" (click)="addGuest()">Dodaj</button>
+  </div>
 
   <ul class="guest-list list-group mt-3">
-    <li *ngFor="let guest of guestList; let i = index">
-      <div *ngIf="!guest.editing" class="guest-row">
-    <div class="guest-left">
-        <strong>{{ guest.name }}</strong>
-        Zaproszony: 
-        <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.invited">
-        Potwierdzenie: 
-        <input class="form-check-input beige-checkbox" type="checkbox" [(ngModel)]="guest.confirmed">
-    </div>
-    <div class="guest-actions"> 
-      <button class="btn btn-sm btn-warning" (click)="editGuestList(i)">Edytuj</button>
-      <button class="btn btn-sm btn-outline-warning" (click)="deleteGuestList(i)">Usuń</button>
-    </div>
-</div>
-    <div *ngIf="guest.editing" class="guest-edit">
-    <input [(ngModel)]="guest.name" class="form-control edit-input">
-    <button class="btn btn-sm btn-warning" (click)="saveGuestList(i, guest.name)">Zapisz</button>
-  </div>
+    <li *ngFor="let guest of guestList; let i = index" class="list-group-item">
+      <div *ngIf="!guest.editing" class="guest-row d-flex justify-content-between align-items-center">
+        <div class="guest-left">
+          <strong>{{ guest.name }}</strong>
+
+          <div class="mt-1">
+            Status:
+            <select [(ngModel)]="guest.status" (change)="updateGuest(i)" class="form-select d-inline w-auto ms-2">
+              <option value="Invited">Zaproszony</option>
+              <option value="Yes">Potwierdzony</option>
+              <option value="No">Odmówił</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="guest-actions">
+          <button class="btn btn-sm btn-warning me-1" (click)="editGuestList(i)">Edytuj</button>
+          <button class="btn btn-sm btn-outline-warning" (click)="deleteGuestList(i)">Usuń</button>
+        </div>
+      </div>
+
+      <div *ngIf="guest.editing" class="guest-edit mt-2">
+        <input [(ngModel)]="guest.name" class="form-control edit-input mb-2">
+        <button class="btn btn-sm btn-warning" (click)="saveGuestList(i, guest.name)">Zapisz</button>
+      </div>
     </li>
   </ul>
+</div> -->
+
+
+
+
+
+
+
+ <!-- <div class="guest-card">
+  <h2 class="text-dark mb-4">Lista gości</h2>
+
+  <div *ngIf="guestLists.length === 0" class="alert alert-info">
+    Brak gości do wyświetlenia.
+  </div>
+
+  <div *ngFor="let list of guestLists" class="guest-list-card mb-4 p-3 border rounded">
+    <h4>Lista nr {{ list.id }} (Wedding ID: {{ list.weddingId }})</h4>
+
+    <div *ngIf="list.guests.length === 0" class="text-muted mb-2">
+      Brak gości na tej liście.
+    </div>
+
+    <ul class="list-group mb-3">
+      <li *ngFor="let guest of list.guests" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ guest.fullName }}</strong> 
+          <span class="ms-2 badge bg-secondary">{{ guest.status }}</span>
+          <div class="small text-muted">
+            Email: {{ guest.email || '-' }}, Tel: {{ guest.phoneNumber || '-' }}, Liczba: {{ guest.count }}
+          </div>
+          <div *ngIf="guest.notes" class="fst-italic small">Notatki: {{ guest.notes }}</div>
+        </div>
+      </li>
+    </ul>
+
+    <button class="btn btn-sm btn-outline-danger" (click)="deleteList(list.id)">Usuń listę</button>
+  </div>
+</div>
+ -->
+
+
+
+<div *ngFor="let list of guestLists" class="card mb-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5>Lista ID: {{ list.id }} (Wedding ID: {{ list.weddingId }})</h5>
+    <button class="btn btn-sm btn-danger" (click)="deleteList(list.id)">Usuń listę</button>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let guest of list.guests; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+      <div *ngIf="!guest.editing">
+        <strong>{{ guest.fullName }}</strong>
+        <span class="badge bg-secondary ms-2">{{ guest.status }}</span>
+        <div class="small text-muted">
+          Email: {{ guest.email || '-' }}, Tel: {{ guest.phoneNumber || '-' }}, Ilość: {{ guest.count }}
+        </div>
+      </div>
+
+      <div *ngIf="guest.editing" class="w-100">
+        <input [(ngModel)]="guest.fullName" class="form-control mb-1" placeholder="Imię i nazwisko">
+        <input [(ngModel)]="guest.email" class="form-control mb-1" placeholder="Email">
+        <input [(ngModel)]="guest.phoneNumber" class="form-control mb-1" placeholder="Telefon">
+        <input [(ngModel)]="guest.count" type="number" min="1" class="form-control mb-1" placeholder="Ilość">
+        <select [(ngModel)]="guest.status" class="form-select mb-1">
+          <option value="Invited">Zaproszony</option>
+          <option value="Yes">Potwierdzony</option>
+          <option value="No">Odmówił</option>
+        </select>
+        <button class="btn btn-sm btn-success me-2" (click)="saveGuest(list, guest)">Zapisz</button>
+        <button class="btn btn-sm btn-secondary" (click)="cancelEdit(guest)">Anuluj</button>
+      </div>
+
+      <div *ngIf="!guest.editing" class="guest-actions">
+        <button class="btn btn-sm btn-warning me-1" (click)="editGuest(guest)">Edytuj</button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteGuest(list, guest.id)">Usuń</button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Formularz dodawania nowego gościa do listy -->
+  <div class="mt-3">
+    <h6>Dodaj nowego gościa</h6>
+    <input [(ngModel)]="newGuestName[list.id]" placeholder="Imię i nazwisko" class="form-control mb-1">
+    <input [(ngModel)]="newGuestCount[list.id]" type="number" min="1" placeholder="Ilość" class="form-control mb-1">
+    <select [(ngModel)]="newGuestStatus[list.id]" class="form-select mb-2">
+      <option value="Invited">Zaproszony</option>
+      <option value="Yes">Potwierdzony</option>
+      <option value="No">Odmówił</option>
+    </select>
+    <button class="btn btn-primary" (click)="addGuestToList(list.id)">Dodaj gościa</button>
+  </div>
 </div>
