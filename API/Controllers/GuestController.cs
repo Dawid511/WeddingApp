@@ -2,10 +2,13 @@ using API.DTOs;
 using API.Entities;
 using API.Services;
 using API.Types;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class GuestsController(GuestService guestService) : ControllerBase
@@ -15,7 +18,11 @@ public class GuestsController(GuestService guestService) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<GuestDto>>> GetAll()
     {
-        var guests = await _guestService.GetAllAsync();
+        var userIdStr = User.FindFirst("id")?.Value;
+        if (userIdStr == null) return Unauthorized();
+
+        int userId = int.Parse(userIdStr);
+        var guests = await _guestService.GetAllByUserIdAsync(userId);
 
         var result = guests.Select(g => new GuestDto
         {
@@ -56,9 +63,13 @@ public class GuestsController(GuestService guestService) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<GuestDto>> Create(CreateGuestDto dto)
     {
+        var userIdStr = User.FindFirst("id")?.Value;
+        if (userIdStr == null) return Unauthorized();
+
+        int userId = int.Parse(userIdStr);
+
         var guest = new Guest
         {
-            GuestListId = dto.GuestListId,
             FullName = dto.FullName,
             Email = dto.Email,
             PhoneNumber = dto.PhoneNumber,
@@ -66,7 +77,8 @@ public class GuestsController(GuestService guestService) : ControllerBase
             Notes = dto.Notes
         };
 
-        var added = await _guestService.AddAsync(guest);
+        var added = await _guestService.AddAsync(userId, guest);
+        if (added == null) return BadRequest("Nie znaleziono ślubu lub listy gości dla tego użytkownika.");
 
         return CreatedAtAction(nameof(GetById), new { id = added.Id }, new GuestDto
         {

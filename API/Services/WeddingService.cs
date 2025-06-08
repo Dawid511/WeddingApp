@@ -28,10 +28,30 @@ public class WeddingService(DataContext context)
 
     public async Task<Wedding> AddAsync(Wedding wedding)
     {
+        // Dodaj wesele do kontekstu i zapisz, żeby uzyskać wedding.Id
         _context.Weddings.Add(wedding);
         await _context.SaveChangesAsync();
+
+        // Utwórz powiązane listy
+        var guestList = new GuestList { WeddingId = wedding.Id };
+        var todoList = new ToDoList { WeddingId = wedding.Id };
+        var expenseList = new ExpenseList { WeddingId = wedding.Id };
+
+        // Dodaj do kontekstu i przypisz do obiektu Wedding (opcjonalne)
+        _context.GuestLists.Add(guestList);
+        _context.ToDoLists.Add(todoList);
+        _context.ExpenseLists.Add(expenseList);
+
+        // Przypisz do wedding, jeśli chcesz mieć dostępne od razu
+        wedding.GuestList = guestList;
+        wedding.ExpenseList = expenseList;
+        // todoList możesz przypisać podobnie, jeśli masz w encji Wedding
+
+        await _context.SaveChangesAsync();
+
         return wedding;
     }
+
 
     public async Task<bool> UpdateAsync(Wedding wedding)
     {

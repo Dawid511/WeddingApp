@@ -8,35 +8,34 @@ public class ToDoTaskService(DataContext context)
 {
     private readonly DataContext _context = context;
 
-    public async Task<List<ToDoTask>> GetAllAsync()
+    public async Task<List<ToDoTask>> GetAllByUserIdAsync(int userId)
     {
-        return await _context.ToDoTasks.ToListAsync();
+        var wedding = await _context.Weddings
+            .Include(w => w.ToDoList)
+                .ThenInclude(t => t.Tasks)
+            .FirstOrDefaultAsync(w => w.AppUserId == userId);
+
+        return wedding?.ToDoList?.Tasks?.ToList() ?? [];
     }
 
-    public async Task<ToDoTask?> GetByIdAsync(int id)
+    public async Task<ToDoTask?> AddAsync(int userId, string title)
     {
-        return await _context.ToDoTasks.FindAsync(id);
-    }
+        var wedding = await _context.Weddings
+            .Include(w => w.ToDoList)
+            .FirstOrDefaultAsync(w => w.AppUserId == userId);
 
-    public async Task<ToDoTask> AddAsync(ToDoTask task)
-    {
+        var list = wedding?.ToDoList;
+        if (list == null) return null;
+
+        var task = new ToDoTask
+        {
+            Title = title,
+            ToDoListId = list.Id
+        };
+
         _context.ToDoTasks.Add(task);
         await _context.SaveChangesAsync();
+
         return task;
-    }
-
-    public async Task<bool> UpdateAsync(ToDoTask task)
-    {
-        _context.ToDoTasks.Update(task);
-        return await _context.SaveChangesAsync() > 0;
-    }
-
-    public async Task<bool> DeleteAsync(int id)
-    {
-        var task = await _context.ToDoTasks.FindAsync(id);
-        if (task == null) return false;
-
-        _context.ToDoTasks.Remove(task);
-        return await _context.SaveChangesAsync() > 0;
     }
 }
