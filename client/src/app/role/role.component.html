@@ -1,15 +1,27 @@
 <div class="role-selection-container">
+  <!-- Nagłówek sekcji wyboru roli -->
   <h2>Wybierz swoją rolę</h2>
+  <br>
 
+  <!-- Kontener na karty wyboru roli -->
   <div class="roles">
+
+    <!-- Karta roli "User" – kliknięcie ustawia rolę na 'User' -->
     <div class="role-card" (click)="setRole('User')">
+      <!-- Ikona reprezentująca użytkownika -->
       <img src="icons/just-married.png" alt="Użytkownik" />
+      <!-- Nagłówek opisujący rolę -->
       <h3>Stwórz swoje wesele</h3>
     </div>
 
+    <!-- Karta roli "Vendor" – kliknięcie ustawia rolę na 'Vendor' -->
     <div class="role-card" (click)="setRole('Vendor')">
+      <!-- Ikona reprezentująca usługę/dostawcę -->
       <img src="icons/customer-review.png" alt="Usługa" />
+      <!-- Nagłówek opisujący rolę -->
       <h3>Dodaj usługę</h3>
     </div>
   </div>
+  <br>
 </div>
+<br>

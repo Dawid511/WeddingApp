@@ -20,7 +20,6 @@ export class VendorAddComponent {
   cancelAddVendor = output<boolean>();  
 
    categories: string[] = [
-    'venue',
     'Catering',
     'Photographer',
     'Florist',

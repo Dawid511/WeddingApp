@@ -1,47 +1,66 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-beige shadow-sm">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/" routerLinkActive="active">
+    <!-- Logo i nazwa aplikacji, link do strony głównej -->
+    <a class="navbar-brand fw-bold text-dark" routerLink="/" routerLinkActive="active">
       <img src="icons/wedding-bells.png" alt="Logo" width="30" class="me-2">WeddingPlaner
     </a>
 
+    <!-- Przycisk rozwijania menu (dla małych ekranów) -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Główna nawigacja, która rozwija się lub zwija -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
+      
+      <!-- Lista linków dostępna tylko jeśli użytkownik jest zalogowany -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         @if (accountService.currentUser()){
+          <!-- Link do strony z ofertą usług -->
           <li class="nav-item"><a routerLink="/vendor" routerLinkActive="active" class="nav-link">Oferta</a></li>
+          <!-- Link do listy gości -->
           <li class="nav-item"><a routerLink="/guest" routerLinkActive="active" class="nav-link">Lista gości</a></li>
+          <!-- Link do listy zadań -->
           <li class="nav-item"><a routerLink="/todo" routerLinkActive="active" class="nav-link">Lista zadań</a></li>
+          <!-- Link do inspiracji -->
           <li class="nav-item"><a routerLink="/inspirations" routerLinkActive="active" class="nav-link">Inspiracje</a></li>
         }
       </ul>
 
+      <!-- Dropdown z informacją o użytkowniku i opcją wylogowania (tylko dla zalogowanych) -->
       @if (accountService.currentUser()){
         <div dropdown class="dropdown ms-lg-3">
           <a dropdownToggle class="dropdown-toggle text-dark text-decoration-none">
+            <!-- Ikona użytkownika -->
             <img src="icons/person-hearts.svg" alt="User" width="24" class="me-1">
+            <!-- Powitanie z nazwą użytkownika, formatowaną dużą literą -->
             Witaj {{ accountService.currentUser()?.username | titlecase }}
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+            <!-- Przycisk wylogowania -->
             <a class="dropdown-item logou-button" (click)="logout()">Wyloguj</a>
           </div>
         </div>
       }
 
+      <!-- Formularz logowania i przycisk do jego wyświetlenia (pokazywany tylko gdy użytkownik NIE jest zalogowany) -->
       @if (!accountService.currentUser()) {
         <div class="login-wrapper position-relative ms-auto">
+          <!-- Ikona przycisku otwierającego formularz logowania -->
           <button class="icon-button btn p-0 border-0 bg-transparent" (click)="toggleLoginForm()" title="Zaloguj się">
             <img src="icons/person-hearts.svg" alt="Zaloguj się" width="32" height="32">
           </button>
 
+          <!-- Formularz logowania, widoczny po kliknięciu przycisku -->
           <div *ngIf="showLoginForm" class="login-form-container position-absolute end-0 mt-2 z-3">
             <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off"
               class="bg-white p-3 shadow rounded d-flex flex-column gap-2" style="width: 300px;">
+              <!-- Pole na login -->
               <input name="username" [(ngModel)]="model.username" class="form-control" placeholder="Login">
+              <!-- Pole na hasło -->
               <input name="password" [(ngModel)]="model.password" class="form-control" placeholder="Hasło" type="password">
+              <!-- Przycisk do zalogowania -->
               <button class="btn btn-warning w-100" type="submit">Zaloguj</button>
             </form>
           </div>

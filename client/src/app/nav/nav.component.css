@@ -1,6 +1,11 @@
 .navbar-beige {
     background-color: #f6e2b3;
 }
+
+.navbar-beige.shadow-sm {
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
 .navbar-beige .nav-link,
 .navbar-beige .navbar-brand {
     font-weight: bold;

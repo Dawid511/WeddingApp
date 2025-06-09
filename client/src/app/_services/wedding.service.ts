@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Wedding } from '../_modules/wedding';
 import { environment } from '../../environments/environment';
@@ -8,8 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class WeddingService {
-  apiUrl= environment.apiUrl + 'weddings';
-    
+  apiUrl = environment.apiUrl + 'weddings';
 
   constructor(private http: HttpClient) {}
 
@@ -17,9 +16,12 @@ export class WeddingService {
     return this.http.get<Wedding[]>(this.apiUrl);
   }
 
-  getWeddingById(id: number): Observable<Wedding> {
-    return this.http.get<Wedding>(`${this.apiUrl}/${id}`);
-  }
+ getWeddingById(): Observable<Wedding> {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.get<Wedding>(`${this.apiUrl}`, { headers });
+}
+
 
   createWedding(wedding: Partial<Wedding>): Observable<Wedding> {
     return this.http.post<Wedding>(this.apiUrl, wedding);
@@ -32,4 +34,11 @@ export class WeddingService {
   deleteWedding(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+getWeddingWithHeaders(id: number): Observable<HttpResponse<Wedding>> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+  return this.http.get<Wedding>(`${this.apiUrl}/${id}`, { headers, observe: 'response' });
+}
 }

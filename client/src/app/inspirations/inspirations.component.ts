@@ -17,15 +17,12 @@ export class InspirationsComponent {
       images: [
         'images/dekoracje1.jpg',
         'images/dekoracje2.jpg',
-        'images/dekoracje3.jpg'
-      ]
-    },
-    {
-      name: 'Zaproszenia',
-      images: [
-        'images/zaproszenie1.jpg',
-        'images/zaproszenie2.jpg',
-        'images/zaproszenie3.jpg'
+        'images/dekoracje3.jpg',
+        'images/b1.jpg',
+        'images/b2.jpg',
+        'images/b3.jpg',
+        'images/b4.jpg',
+        'images/b5.jpg'
       ]
     },
     {
@@ -33,7 +30,12 @@ export class InspirationsComponent {
       images: [
         'images/kwiaty1.jpg',
         'images/kwiaty2.jpg',
-        'images/kwiaty3.jpg'
+        'images/kwiaty3.jpg',
+        'images/k1.webp',
+        'images/k2.webp',
+        'images/k3.jpg',
+        'images/k4.jpg',
+        'images/k5.jpg'
       ]
     },
     {
@@ -67,6 +69,22 @@ export class InspirationsComponent {
         'images/g6.webp'
 
       ]
+    },
+    {
+      name: 'Zaproszenia',
+      images: [
+        'images/zaproszenie1.jpg',
+        'images/zaproszenie2.jpg',
+        'images/zaproszenie3.jpg',
+        'images/z1.jpg',
+        'images/z2.jpg',
+        'images/z3.jpg',
+        'images/z4.jpg',
+        'images/z5.jpg',
+        'images/z6.jpg',
+        'images/z7.jpg',
+        'images/z8.jpg'
+      ]
     }
     ,
     {
@@ -81,6 +99,36 @@ export class InspirationsComponent {
         'images/w5.webp',
         'images/w6.webp',
         'images/w7.jpg'
+
+      ]
+    }
+    ,
+    {
+      name: 'Sesja ślubna',
+      images: [
+        'images/p1.jpg',
+        'images/p2.jpg',
+        'images/p3.jpg',
+        'images/p4.jpg',
+        'images/p6.jpg',
+        'images/n1.jpg',
+        'images/p7.jpg',
+        'images/p8.jpg',
+        'images/p9.jpg'
+
+      ]
+    },
+    {
+      name: 'Pomysły na zdjęcia',
+      images: [
+        'images/p5.jpg',
+        'images/n2.jpg',
+        'images/s1.jpg',
+        'images/s4.jpg',
+        'images/s5.jpg',
+        'images/s6.jpg',
+        'images/s7.jpg',
+        'images/s8.jpg'
 
       ]
     }

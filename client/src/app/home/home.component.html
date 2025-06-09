@@ -1,25 +1,37 @@
 <div class="homepage-wrapper">
   <div class="overlay">
     <div class="container mt-3 text-center fade-in">
+
+      <!-- Sprawdzamy, czy użytkownik nie jest w trybie rejestracji -->
       @if (!registerMode){
-    <div class="wedding-hero">
-  <img src="icons/wedding-bells.png" alt="Wedding Bells">
-<h1 class="display-4 text-dark">Zaplanuj swoje wesele!</h1>
-        <p class="lead text-dark">Spraw by ten dzień był niezwykły i dopracowany w każdym aspekcie! Załóż konto, aby odkryć wszystkie funkcje.</p>   
-      </div>
-        
+
+        <!-- Sekcja powitalna z grafiką i nagłówkiem -->
+        <div class="wedding-hero">
+          <img src="icons/wedding-bells.png" alt="Wedding Bells">
+          <h1 class="display-4 text-dark">Zaplanuj swoje wesele!</h1>
+          <p class="lead text-dark">
+            Spraw by ten dzień był niezwykły i dopracowany w każdym aspekcie! Załóż konto, aby odkryć wszystkie funkcje.
+          </p>   
+        </div>
+
+        <!-- Przycisk rejestracji widoczny tylko gdy użytkownik nie jest zalogowany -->
         <div class="mb-4">
           @if (!accountService.currentUser()){
-          <button (click)="registerToddle()" class="btn btn-secondary btn-lg me-2">Zarejestruj się</button>
-          }</div>
+            <button (click)="registerToddle()" class="btn btn-secondary btn-lg me-2">Zarejestruj się</button>
+          }
+        </div>
 
+        <!-- Karuzela zdjęć z opisami różnych funkcji i usług -->
         <div id="carouselExampleCaptions" class="carousel slide rounded shadow-lg" data-bs-ride="carousel">
           <div class="carousel-indicators">
+            <!-- Przyciski nawigacji karuzeli -->
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
+
           <div class="carousel-inner rounded">
+            <!-- Pierwszy slajd -->
             <div class="carousel-item active">
               <img src="images/zdj1.jpg" class="d-block w-100 carousel-img" alt="...">
               <div class="carousel-caption d-none d-md-block">
@@ -27,6 +39,7 @@
                 <p>Wyszukaj idealne miejsce na ten wyjątkowy dzień.</p>
               </div>
             </div>
+            <!-- Drugi slajd -->
             <div class="carousel-item">
               <img src="images/zdj2.jpg" class="d-block w-100 carousel-img" alt="...">
               <div class="carousel-caption d-none d-md-block">
@@ -34,6 +47,7 @@
                 <p>Przeglądaj dekoracje, stroje, dodatki i więcej.</p>
               </div>
             </div>
+            <!-- Trzeci slajd -->
             <div class="carousel-item">
               <img src="images/wesele3.jpg" class="d-block w-100 carousel-img" alt="...">
               <div class="carousel-caption d-none d-md-block">
@@ -42,6 +56,8 @@
               </div>
             </div>
           </div>
+
+          <!-- Kontrolki do zmiany slajdów -->
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -51,86 +67,106 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        <br>
-        <br>
-         
+
+        <br><br>
+
+        <!-- Kilka informacji o aplikacji i korzyściach dla użytkownika -->
         <p class="lead text-dark">Wszystko, czego potrzebujecie, by zaplanować wymarzone wesele – w jednym miejscu.</p>
         <p class="lead text-dark">Proste listy gości, budżetu, zadań i dostęp do najlepszych ofert usług weselnych.</p>
-<br>
-   <div id="tooltip-section">
-  <div class="item-with-icon">
-    <div class="item-image">
-      <img src="icons/wedding-couple.png" alt="Para młoda" width="70" height="70">
-    </div>
-    <div>Uniknij weselnych wpadek</div>
-  </div>
+        <br>
 
-  <div class="item-with-icon">
-    <div class="item-image">
-      <img src="icons/search.png" alt="Wyszukiwanie" width="70" height="70">
-    </div>
-    <div>Miej wszystko pod kontrolą</div>
-  </div>
+        <!-- Sekcja z ikonami i krótkimi hasłami -->
+        <div id="tooltip-section">
+          <div class="item-with-icon">
+            <div class="item-image">
+              <img src="icons/wedding-couple.png" alt="Para młoda" width="70" height="70">
+            </div>
+            <div>Uniknij weselnych wpadek</div>
+          </div>
 
-  <div class="item-with-icon">
-    <div class="item-image">
-      <img src="icons/dating-app.png" alt="Trendy" width="66" height="70">
-    </div>
-    <div>Bądź na bieżąco ze ślubnymi trendami</div>
-  </div>
+          <div class="item-with-icon">
+            <div class="item-image">
+              <img src="icons/search.png" alt="Wyszukiwanie" width="70" height="70">
+            </div>
+            <div>Miej wszystko pod kontrolą</div>
+          </div>
 
-  <div class="item-with-icon">
-    <div class="item-image">
-      <img src="icons/calendar.png" alt="Kalendarz" width="66" height="70">
-    </div>
-    <div>Planuj wtedy, kiedy chcesz</div>
-  </div>
-</div>
+          <div class="item-with-icon">
+            <div class="item-image">
+              <img src="icons/dating-app.png" alt="Trendy" width="66" height="70">
+            </div>
+            <div>Bądź na bieżąco ze ślubnymi trendami</div>
+          </div>
 
-<div class="clearfix line-overflow">
-  <h2 class="text-dark">Zorganizuj swoje wesele krok po kroku!</h2>
-</div>
+          <div class="item-with-icon">
+            <div class="item-image">
+              <img src="icons/calendar.png" alt="Kalendarz" width="66" height="70">
+            </div>
+            <div>Planuj wtedy, kiedy chcesz</div>
+          </div>
+        </div>
 
+        <!-- Nagłówek zachęcający do planowania krok po kroku -->
+        <div class="clearfix line-overflow">
+          <h2 class="text-dark">Zorganizuj swoje wesele krok po kroku!</h2>
+        </div>
 
+        <!-- Grupa kart prezentujących najważniejsze funkcjonalności -->
+        <div class="card-group-container">
 
-<div class="card-group-container">
-  <div class="card-option">
-    <img src="images/guest.jpg" class="card-img-top" alt="Lista gości">
-    <div class="card-body">
-      <h5 class="card-title">Lista gości</h5>
-      <p class="card-text">Możesz dodać swoich gości weselnych i zaznaczać potwierdzenia.</p>
-    </div>
-  </div>
+          <!-- Karta z listą gości -->
+          <div class="card-option">
+            <img src="images/guest.jpg" class="card-img-top" alt="Lista gości">
+            <div class="card-body">
+              <h5 class="card-title">Lista gości</h5>
+              <p class="card-text">Możesz dodać swoich gości weselnych i zaznaczać potwierdzenia.</p>
+            </div>
+          </div>
 
-  <div class="card-option">
-    <img src="images/tasks.jpeg" class="card-img-top" alt="Zadania">
-    <div class="card-body">
-         <h5 class="card-title">Lista zadań</h5>
-      <p class="card-text">Skorzystaj z listy zadań, aby lepiej zaplanować przygotowania do wesela.</p>
-    </div>
-  </div>
+          <!-- Karta z listą zadań -->
+          <div class="card-option">
+            <img src="images/tasks.jpeg" class="card-img-top" alt="Zadania">
+            <div class="card-body">
+              <h5 class="card-title">Lista zadań</h5>
+              <p class="card-text">Skorzystaj z listy zadań, aby lepiej zaplanować przygotowania do wesela.</p>
+            </div>
+          </div>
 
-    <div class="card-option">
-    <img src="images/budget.webp" class="card-img-top" alt="Wydatki">
-    <div class="card-body">
-      <h5 class="card-title">Lista wydatków</h5>
-      <p class="card-text">Śledź wszystkie koszty weselne w jednym miejscu i kontroluj swój budżet.</p>
-    </div>
-  </div>
+          <!-- Karta z listą wydatków -->
+          <div class="card-option">
+            <img src="images/budget.webp" class="card-img-top" alt="Wydatki">
+            <div class="card-body">
+              <h5 class="card-title">Lista wydatków</h5>
+              <p class="card-text">Śledź wszystkie koszty weselne w jednym miejscu i kontroluj swój budżet.</p>
+            </div>
+          </div>
 
+          <!-- Sekcja z ofertą usług weselnych -->
+          <div class="services-section">
+            <div class="services-text">
+              <h3>Przeglądaj i dodawaj usługi weselne</h3>
+              <p>Szukasz fotografa, zespołu muzycznego, dekoracji czy sali weselnej? Dzięki naszej bazie usług możesz łatwo przeglądać dostępne  oferty.</p>
+              <p>Jesteś usługodawcą? Dodaj swoją ofertę i daj się znaleźć przyszłym parom młodym. To idealne miejsce, aby zaprezentować się klientom szukającym sprawdzonych usług ślubnych!</p>
+            </div>
 
-  <div class="services-section">
-  <div class="services-text">
-    <h3>Przeglądaj i dodawaj usługi weselne</h3>
-    <p>Szukasz fotografa, zespołu muzycznego, dekoracji czy sali weselnej? Dzięki naszej bazie usług możesz łatwo przeglądać dostępne  oferty.</p>
-    <p>Jesteś usługodawcą? Dodaj swoją ofertę i daj się znaleźć przyszłym parom młodym. To idealne miejsce, aby zaprezentować się klientom szukającym sprawdzonych usług ślubnych!</p>
-  </div>
+            <div class="services-image">
+              <img src="images/fotograf.jpg" alt="Usługi weselne">
+            </div>
+          </div>
 
-  <div class="services-image">
-    <img src="images/fotograf.jpg" alt="Usługi weselne">
-  </div>
-</div>
-</div>
+        </div>
+
+        <!-- Zachęta do rozpoczęcia planowania wesela -->
+        <section style="text-align:center;">
+          <h2>Zacznij już dziś – Twoje wymarzone wesele czeka!</h2>
+        </section>
+
+        <!-- Rząd trzech zdjęć weselnych -->
+        <div class="three-images-row">
+          <img src="images/foto2.jpg" alt="Wesele 1">
+          <img src="images/foto4.jpeg" alt="Wesele 2">
+          <img src="images/foto3.jpeg" alt="Wesele 3">
+        </div>
 
       } @else {
         <div class="container">
@@ -144,16 +180,6 @@
           </div>
         </div>
       }
-
-<section style="text-align:center;">
-    <h2>Zacznij już dziś – Twoje wymarzone wesele czeka!</h2>
-</section>
-
-<div class="three-images-row">
-  <img src="images/foto2.jpg" alt="Wesele 1">
-  <img src="images/foto4.jpeg" alt="Wesele 2">
-  <img src="images/foto3.jpeg" alt="Wesele 3">
-</div>
 
     </div>
   </div>

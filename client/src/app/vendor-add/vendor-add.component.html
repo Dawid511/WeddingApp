@@ -1,44 +1,56 @@
 <div class="card-inspo">
+  <!-- Nagłówek formularza dodawania nowej usługi -->
   <h2 class="card-header">Dodaj usługę</h2>
 
+  <!-- Formularz obsługiwany przez Angular ngForm oraz event submit wywołujący metodę addVendor() -->
   <form #f="ngForm" (ngSubmit)="addVendor()">
 
+    <!-- Pole wyboru kategorii usługi - wymagane -->
     <div class="form-group">
-    <label for="category">Kategoria *</label>
-<select [(ngModel)]="model.category" name="category" id="category" required>
-  <option value="" disabled selected>Wybierz kategorię</option>
-  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
-</select> </div>
+      <label for="category">Kategoria *</label>
+      <select [(ngModel)]="model.category" name="category" id="category" required>
+        <option value="" disabled selected>Wybierz kategorię</option>
+        <!-- Generowanie opcji kategorii dynamicznie z tablicy categories -->
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+    </div>
 
+    <!-- Pole tekstowe na nazwę firmy - wymagane -->
     <div class="form-group">
       <label>Nazwa firmy *</label>
       <input type="text" name="companyName" [(ngModel)]="model.companyName" required class="form-control" />
     </div>
 
+    <!-- Pole tekstowe wielowierszowe na opis usługi - opcjonalne -->
     <div class="form-group">
       <label>Opis</label>
       <textarea name="description" [(ngModel)]="model.description" class="form-control"></textarea>
     </div>
 
+    <!-- Pole na adres strony internetowej - opcjonalne, walidacja url -->
     <div class="form-group">
       <label>Strona WWW</label>
       <input type="url" name="websiteUrl" [(ngModel)]="model.websiteUrl" class="form-control" />
     </div>
 
+    <!-- Pole na numer telefonu - opcjonalne -->
     <div class="form-group">
       <label>Telefon</label>
       <input type="text" name="phone" [(ngModel)]="model.phone" class="form-control" />
     </div>
 
+    <!-- Pole na email - opcjonalne, walidacja adresu e-mail -->
     <div class="form-group">
       <label>Email</label>
       <input type="email" name="email" [(ngModel)]="model.email" class="form-control" />
     </div>
-<div>   
-<form #f="ngForm" (ngSubmit)="addVendor()">
-  <button type="submit" class="btn btn-sm btn-warning me-2" [disabled]="f.invalid">Dodaj</button>
-  <button type="button" class="btn btn-sm btn-outline-warning" (click)="cancel()">Anuluj</button>
-</form>
-</div>
- </form>
+
+    <!-- Przycisk do zatwierdzenia formularza, aktywny tylko gdy formularz jest poprawnie wypełniony -->
+    <div>   
+      <button type="submit" class="btn btn-sm btn-warning me-2" [disabled]="f.invalid">Dodaj</button>
+      <!-- Przycisk anulowania, wywołuje metodę cancel() -->
+      <button type="button" class="btn btn-sm btn-outline-warning" (click)="cancel()">Anuluj</button>
+    </div>
+
+  </form>
 </div>

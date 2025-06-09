@@ -54,7 +54,6 @@ export class GuestComponent implements OnInit {
 
 saveGuest(index: number): void {
   const guest = this.guests[index];
-  // Możesz tu dodać zapytanie PUT do API jeśli backend wspiera edycję
   guest.editing = false;
 }
 

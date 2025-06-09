@@ -39,7 +39,7 @@ img {
 
 .image-container img {
   width: 100%;
-  height: 400px;           /* np. 250–300px – możesz testować */
+  height: 400px;           
   object-fit: cover;       /* żeby zdjęcie wypełniło przestrzeń */
   border-radius: 12px;
 }

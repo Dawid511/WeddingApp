@@ -1,24 +1,42 @@
 <div class="vendor-container">
-  <h2 class="card-header text-dark">Lista Dostawców</h2>
+  <h2 class="card-header text-dark text-center">Lista Dostawców</h2>
+  <div class="search-bar">
+  <select [(ngModel)]="filterCategory">
+    <option value="">Wszystkie kategorie</option>
+    <option *ngFor="let category of uniqueCategories" [value]="category">
+      {{ category }}
+    </option>
+  </select>
+</div>
 
-  <div *ngIf="vendors.length === 0">
+
+  <div *ngIf="filteredVendors.length === 0" class="no-vendors">
     <p>Brak dostawców do wyświetlenia.</p>
   </div>
 
-  <div *ngFor="let vendor of vendors" class="card-inspo">
-    <div class="vendor-content">
-      <h3>{{ vendor.companyName }}</h3>
-      <p><strong>Kategoria:</strong> {{ vendor.category }}</p>
-      <p *ngIf="vendor.description"><strong>Opis:</strong> {{ vendor.description }}</p>
-      <p *ngIf="vendor.phone"><strong>Telefon:</strong> {{ vendor.phone }}</p>
-      <p *ngIf="vendor.email">
-        <strong>Email: </strong>
-        <a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a>
-      </p>
-      <p *ngIf="vendor.websiteUrl">
-        <strong>Strona: </strong>
-        <a href="{{ vendor.websiteUrl }}" target="_blank">{{ vendor.websiteUrl }}</a>
-      </p>
+  <!-- Lista przefiltrowanych vendorów -->
+  <div class="vendors-grid">
+    <div *ngFor="let vendor of filteredVendors" class="card-inspo">
+      <div class="vendor-content">
+        <h3 class="vendor-name">{{ vendor.companyName }}</h3>
+        <img
+          [src]="getVendorImage(vendor.category)"
+          alt="Zdjęcie dostawcy"
+          class="vendor-image"
+        />
+        <p><strong>Kategoria:</strong> {{ vendor.category }}</p>
+        <p *ngIf="vendor.description"><strong>Opis:</strong> {{ vendor.description }}</p>
+        <p *ngIf="vendor.phone"><strong>Telefon:</strong> {{ vendor.phone }}</p>
+        <p *ngIf="vendor.email">
+          <strong>Email: </strong>
+          <a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a>
+        </p>
+        <p *ngIf="vendor.websiteUrl">
+          <strong>Strona: </strong>
+          <a href="{{ vendor.websiteUrl }}" target="_blank">{{ vendor.websiteUrl }}</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
+
