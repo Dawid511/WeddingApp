@@ -7,22 +7,22 @@
   </div>
 
   <ul class="list-group">
-    <li *ngFor="let task of tasks; let i = index">
-  <div *ngIf="!task.editing" class="task-row">
-    <div class="task-left">
-      <input class="form-check-input beige-checkbox" type="checkbox">
-      <span>{{ task.text }}</span>
-    </div>
-    <div class="task-actions">
-      <button class="btn btn-sm btn-warning" (click)="editTask(i)">Edytuj</button>
-      <button class="btn btn-sm btn-outline-warning" (click)="deleteTask(i)">Usuń</button>
-    </div>
-  </div>
+    <li *ngFor="let task of tasks; let i = index" class="list-group-item">
+      <div *ngIf="!task.editing" class="task-row d-flex justify-content-between align-items-center">
+        <div class="task-left d-flex align-items-center">
+          <input class="form-check-input beige-checkbox me-2" type="checkbox">
+          <span>{{ task.title }}</span>
+        </div>
+        <div class="task-actions">
+          <button class="btn btn-sm btn-warning me-1" (click)="editTask(i)">Edytuj</button>
+          <button class="btn btn-sm btn-outline-warning" (click)="deleteTask(i)">Usuń</button>
+        </div>
+      </div>
 
-  <div *ngIf="task.editing" class="task-edit">
-    <input [(ngModel)]="task.text" class="form-control edit-input">
-    <button class="btn btn-sm btn-warning" (click)="saveTask(i, task.text)">Zapisz</button>
-  </div>
-</li>
+      <div *ngIf="task.editing" class="task-edit d-flex align-items-center">
+        <input [(ngModel)]="task.title" class="form-control edit-input me-2">
+        <button class="btn btn-sm btn-warning" (click)="saveTask(i)">Zapisz</button>
+      </div>
+    </li>
   </ul>
 </div>

@@ -1,43 +1,32 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Guest } from '../_modules/guest';
-import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestService {
-  private http = inject(HttpClient);
-  private accountService = inject(AccountService);
-  private baseUrl = environment.apiUrl + 'guests/';
+  private baseUrl = environment.apiUrl + 'guests';
 
-  private getHttpOptions() {
-    const token = this.accountService.currentUser()?.token;
-    return {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
-      })
-    };
+  constructor(private http: HttpClient) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
   }
 
-  getGuests() {
-    return this.http.get<Guest[]>(this.baseUrl, this.getHttpOptions());
+  getGuests(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl, { headers: this.getHeaders() });
   }
 
-  getGuest(id: number) {
-    return this.http.get<Guest>(this.baseUrl + id, this.getHttpOptions());
+  addGuest(fullName: string, count: number): Observable<any> {
+    return this.http.post(this.baseUrl, { fullName, count }, { headers: this.getHeaders() });
   }
 
-  addGuest(guest: Partial<Guest>) {
-    return this.http.post<Guest>(this.baseUrl, guest, this.getHttpOptions());
-  }
-
-  updateGuest(guest: Guest) {
-    return this.http.put<void>(this.baseUrl + guest.id, guest, this.getHttpOptions());
-  }
-
-  deleteGuest(id: number) {
-    return this.http.delete<void>(this.baseUrl + id, this.getHttpOptions());
+  deleteGuest(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { headers: this.getHeaders() });
   }
 }

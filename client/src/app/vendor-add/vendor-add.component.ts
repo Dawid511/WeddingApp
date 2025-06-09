@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { VendorService } from '../_services/vendor.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-add',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class VendorAddComponent {
   private vendorService = inject(VendorService);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   cancelAddVendor = output<boolean>();  
 
@@ -33,14 +35,14 @@ export class VendorAddComponent {
     this.vendorService.create(this.model).subscribe({
       next: response => {
         this.toastr.success('Vendor został dodany');
-        this.cancel(); // zamknij formularz po sukcesie
+        this.cancel(); 
+
       },
       error: error => this.toastr.error(error?.error || 'Wystąpił błąd')
     });
   }
 
-
   cancel() {
-    this.cancelAddVendor.emit(false);
+    this.router.navigate(['/vendor']);
   }
 }

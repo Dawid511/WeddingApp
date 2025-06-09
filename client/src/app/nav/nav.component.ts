@@ -5,6 +5,9 @@ import { CommonModule, NgIf, TitleCasePipe } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-nav',
@@ -15,6 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent {
   accountService = inject(AccountService);
+  authService = inject(AuthService);
   private router = inject(Router);
   private toastr = inject(ToastrService);
   model: any = {};
@@ -38,4 +42,18 @@ export class NavComponent {
     this.router.navigateByUrl('/')
   }
 
+  role: string | null = null;
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        this.role = (payload['role'] as string)?.toLowerCase() || null;
+      } catch (e) {
+        this.role = null;
+      }
+    }
+  }
 }
+

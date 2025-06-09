@@ -1,33 +1,69 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Guest } from '../_modules/guest';
+import { Component, OnInit } from '@angular/core';
 import { GuestService } from '../_services/guest.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-guest',
-  templateUrl: './guest.component.html',
-  styleUrls: ['./guest.component.css'],
   standalone: true,
-  imports: []
+    imports: [CommonModule, FormsModule],
+    templateUrl: './guest.component.html',
+    styleUrl: './guest.component.css'
 })
 export class GuestComponent implements OnInit {
-  guests: Guest[] = [];
-  private guestService = inject(GuestService);
+  guests: any[] = [];
+  newFullName: string = '';
+  newCount: number = 1;
+
+  constructor(private guestService: GuestService) {}
 
   ngOnInit(): void {
     this.loadGuests();
   }
 
-  loadGuests() {
+  loadGuests(): void {
     this.guestService.getGuests().subscribe({
-      next: g => this.guests = g,
-      error: err => console.error('Błąd ładowania gości:', err)
+      next: (data) => (this.guests = data),
+      error: (err) => console.error('Błąd ładowania gości:', err)
     });
   }
 
-  deleteGuest(id: number) {
-    this.guestService.deleteGuest(id).subscribe({
-      next: () => this.guests = this.guests.filter(g => g.id !== id),
-      error: err => console.error('Błąd usuwania gościa:', err)
+  addGuest(): void {
+    if (!this.newFullName || this.newCount <= 0) return;
+
+    this.guestService.addGuest(this.newFullName, this.newCount).subscribe({
+      next: () => {
+        this.newFullName = '';
+        this.newCount = 1;
+        this.loadGuests();
+      },
+      error: (err) => console.error('Błąd dodawania gościa:', err)
     });
   }
+
+  deleteGuest(id: number): void {
+    this.guestService.deleteGuest(id).subscribe({
+      next: () => this.loadGuests(),
+      error: (err) => console.error('Błąd usuwania gościa:', err)
+    });
+  }
+
+  editGuest(index: number): void {
+  this.guests[index].editing = true;
+}
+
+saveGuest(index: number): void {
+  const guest = this.guests[index];
+  // Możesz tu dodać zapytanie PUT do API jeśli backend wspiera edycję
+  guest.editing = false;
+}
+
+totalGuestCount(): number {
+  return this.guests.reduce((sum, guest) => sum + (guest.count || 0), 0);
+}
+
+
+updateGuest(index: number): void {
+  console.log('Zmieniono status gościa:', this.guests[index]);
+}
 }

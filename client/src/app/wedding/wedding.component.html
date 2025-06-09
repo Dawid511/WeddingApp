@@ -1,48 +1,53 @@
-<div class="wedding-form">
-  <h2>Utwórz / Edytuj Wesele</h2>
-  
+<div class="wedding-card">
+  <h2 class="text-dark">Utwórz / Edytuj Wesele</h2>
+
   <form (ngSubmit)="createWedding()" #weddingForm="ngForm">
-    <div>
-      <label for="title">Tytuł wesela</label>
+    <div class="form-group mb-3">
+      <label for="title" class="form-label">Tytuł wesela</label>
       <input
         id="title"
         name="title"
         type="text"
+        class="form-control"
         [(ngModel)]="model.title"
         required
         #title="ngModel"
       />
-      <div *ngIf="title.invalid && title.touched" class="error">
+      <div *ngIf="title.invalid && title.touched" class="form-error">
         Tytuł jest wymagany
       </div>
     </div>
 
-    <div>
-      <label for="weddingDate">Data wesela</label>
+    <div class="form-group mb-3">
+      <label for="weddingDate" class="form-label">Data wesela</label>
       <input
         id="weddingDate"
         name="weddingDate"
         type="date"
+        class="form-control"
         [(ngModel)]="model.weddingDate"
         required
         #weddingDate="ngModel"
       />
-      <div *ngIf="weddingDate.invalid && weddingDate.touched" class="error">
+      <div *ngIf="weddingDate.invalid && weddingDate.touched" class="form-error">
         Data wesela jest wymagana
       </div>
     </div>
 
-    <div>
-      <label for="location">Lokalizacja (opcjonalnie)</label>
+    <div class="form-group mb-4">
+      <label for="location" class="form-label">Lokalizacja (opcjonalnie)</label>
       <input
         id="location"
         name="location"
         type="text"
+        class="form-control"
         [(ngModel)]="model.location"
       />
     </div>
 
-    <button type="submit" [disabled]="weddingForm.invalid">Zapisz wesele</button>
-    <button type="button" (click)="cancel()">Anuluj</button>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-warning me-2" [disabled]="weddingForm.invalid">Zapisz wesele</button>
+      <button type="button" class="btn btn-outline-warning" (click)="cancel()">Anuluj</button>
+    </div>
   </form>
 </div>

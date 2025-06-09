@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { WeddingService } from '../_services/wedding.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wedding',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class WeddingComponent {
   private weddingService = inject(WeddingService);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   @Output() close = new EventEmitter<void>();
 
@@ -28,13 +30,13 @@ export class WeddingComponent {
     this.weddingService.createWedding(this.model).subscribe({
       next: (response) => {
         this.toastr.success('Wesele utworzone!');
-        this.close.emit();
+        this.cancel(); 
       },
       error: (err) => this.toastr.error(err.error || 'Błąd podczas tworzenia wesela')
     });
   }
 
   cancel() {
-    this.close.emit();
+    this.router.navigate(['/home']);
   }
 }

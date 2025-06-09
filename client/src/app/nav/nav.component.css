@@ -63,9 +63,33 @@
   position: relative;
 }
 
-.login-form-container {
-  position: absolute;
-  top: 40px; /* pod ikoną */
-  right: 0;
-  z-index: 1000;
+
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  color: #444;
+  transition: color 0.2s ease;
 }
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #d2815a;
+}
+
+.login-form-container {
+  top: 100%;
+  right: 0;
+  z-index: 1050;
+}
+
+.dropdown-toggle::after {
+  margin-left: 0.4em;
+}
+
+@media (max-width: 991px) {
+  .login-wrapper {
+    margin-top: 1rem;
+  }
+}
+

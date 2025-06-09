@@ -40,8 +40,17 @@ export class InspirationsComponent {
       name: 'Suknie ślubne',
       images: [
         'images/suknia1.jpg',
-        'images/suknia2.jpg',
-        'images/suknia3.jpg'
+        'images/suknia2.webp',
+        'images/suknia3.jpg',
+        'images/suknia4.webp',
+        'images/suknia5.webp',
+        'images/suknia6.webp',
+        'images/suknia7.webp',
+        'images/suknia8.webp',
+        'images/suknia9.webp',
+        'images/suknia10.webp',
+        'images/suknia11.webp',
+        'images/suknia12.webp'
       ]
     }
     ,
@@ -49,8 +58,14 @@ export class InspirationsComponent {
       name: 'Garnitury',
       images: [
         'images/garnitur1.jpg',
+        'images/g1.webp',
         'images/garnitur2.jpg',
-        'images/garnitur3.jpg'
+        'images/g2.webp',
+        'images/g3.webp',
+        'images/g4.webp',
+        'images/g5.webp',
+        'images/g6.webp'
+
       ]
     }
     ,
@@ -59,9 +74,36 @@ export class InspirationsComponent {
       images: [
         'images/winietka1.jpg',
         'images/winietka2.jpg',
-        'images/winietka3.jpg'
+        'images/winietka3.jpg',
+        'images/w1.jpg',
+        'images/w2.jpg',
+        'images/w4.webp',
+        'images/w5.webp',
+        'images/w6.webp',
+        'images/w7.jpg'
+
       ]
     }
   ];
+
+  expandedCategories = new Set<string>();
+
+  toggleCategory(name: string): void {
+    if (this.expandedCategories.has(name)) {
+      this.expandedCategories.delete(name);
+    } else {
+      this.expandedCategories.add(name);
+    }
+  }
+
+  isExpanded(name: string): boolean {
+    return this.expandedCategories.has(name);
+  }
+
+  slugify(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+}
+
+
 }
 

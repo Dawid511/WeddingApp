@@ -19,3 +19,27 @@ img {
   height: 180px;
   width: 100%;
 }
+
+.image-container {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+
+.hover-zoom {
+  transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+  transform: scale(1.05);
+}
+
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.6); 
+}
+
+.image-container img {
+  width: 100%;
+  height: 400px;           /* np. 250–300px – możesz testować */
+  object-fit: cover;       /* żeby zdjęcie wypełniło przestrzeń */
+  border-radius: 12px;
+}

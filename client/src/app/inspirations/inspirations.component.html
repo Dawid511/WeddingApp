@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<!-- <div class="container mt-4">
   <div class="row">
     <div class="col-md-12 col-lg-6 mb-4" *ngFor="let category of inspirations">
       <div class="card card-inspo h-100">
@@ -15,5 +15,60 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12 col-lg-6 mb-4" *ngFor="let category of inspirations">
+      <div class="card card-inspo h-100 shadow-sm">
+        <!-- Tytuł otwierający modal -->
+        <div 
+          class="card-header text-dark fw-bold"
+          data-bs-toggle="modal"
+          [attr.data-bs-target]="'#modal-' + slugify(category.name)"
+          style="cursor: pointer; background-color: #fdf6ec;"
+        >
+          {{ category.name }}
+        </div>
+
+        <!-- 3 miniaturki -->
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-4" *ngFor="let image of category.images.slice(0, 3)">
+              <img [src]="image" class="img-fluid rounded shadow-sm" alt="inspiracja">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL fullscreen -->
+      <div 
+        class="modal fade" 
+        [attr.id]="'modal-' + slugify(category.name)" 
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content" style="background-color: #fffdf7;">
+            <div class="modal-header" style="background-color: #f6e2b3;">
+              <h5 class="modal-title fw-bold text-dark text-center w-100">{{ category.name }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-12 col-md-6 col-lg-4" *ngFor="let image of category.images">
+                  <div class="image-container">
+                    <img [src]="image" class="img-fluid rounded shadow-sm hover-zoom" alt="inspiracja">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+
 

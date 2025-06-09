@@ -64,7 +64,7 @@
   }
   
   li {
-     background-color: #fff9f1;
+  background-color: #fff9f1;
   border: 1px solid #f0dbb4;
   padding: 12px;
   margin-bottom: 12px;
@@ -95,10 +95,6 @@
     color: #6c5c45; 
   }
 
-  .beige-checkbox:checked {
-  background-color: #f6e2b3;
-  border-color: #d9b99b;
-}
 
 .beige-checkbox:hover {
   background-color: #d7c4a3; 
@@ -107,4 +103,20 @@
 .beige-checkbox:focus {
   border-color: #d7c4a3; 
   box-shadow: 0 0 0 0.25rem rgba(215, 196, 163, 0.25); 
+}
+
+.beige-checkbox {
+  border: 2px solid #d9b99b; 
+  background-color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.beige-checkbox:checked {
+  background-color: #f6e2b3;
+  border-color: #d9b99b;
 }

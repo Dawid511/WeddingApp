@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from '../_modules/user';
+import { User, UserRole } from '../_modules/user';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
   baseUrl = environment.apiUrl;
   currentUser = signal<User | null>(null);
 
@@ -29,23 +31,12 @@ export class AccountService {
         if(user){
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUser.set(user);
+          this.authService.setToken(user.token);
         }
         return user;
       })
     )
   }
-
-  updateUserRole(userId: number, role: string) {
-  return this.http.put<User>(this.baseUrl + 'account/set-role', { userId, role }).pipe(
-    map(user => {
-      if(user){
-        localStorage.setItem('user', JSON.stringify(user));
-        this.currentUser.set(user);
-      }
-      return user;
-    })
-  );
-}
 
   logout(){
     localStorage.removeItem('user');

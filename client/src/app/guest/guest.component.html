@@ -1,1 +1,43 @@
-<p>guest works!</p>
+<div class="guest-card">
+  <h2 class="text-dark">Lista gości</h2>
+
+  <div class="text-center my-3">
+    <span class="text-dark">Liczba osób: {{ totalGuestCount() }}</span>
+  </div>
+
+  <div class="input-group">
+    <input type="text" [(ngModel)]="newFullName" placeholder="Imię i nazwisko..." class="form-control name-input me-2">
+    <input type="number" [(ngModel)]="newCount" min="1" class="form-control guest-count-input me-2" placeholder="Ilość">
+    <button class="btn btn-warning" type="button" (click)="addGuest()">Dodaj</button>
+  </div>
+
+  <ul class="guest-list list-group mt-3">
+    <li *ngFor="let guest of guests; let i = index" class="list-group-item">
+      <div *ngIf="!guest.editing" class="guest-row d-flex justify-content-between align-items-center">
+        <div class="guest-left">
+          <strong>{{ guest.fullName }}</strong>
+
+          <div class="">
+            Status:
+            <select [(ngModel)]="guest.status" (change)="updateGuest(i)" class="form-select d-inline w-auto ms-2">
+              <option value="Invited">Zaproszono</option>
+              <option value="Yes">Potwierdzono</option>
+              <option value="No">Odmówiono</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="guest-actions">
+          <button class="btn btn-sm btn-warning me-1" (click)="editGuest(i)">Edytuj</button>
+          <button class="btn btn-sm btn-outline-warning" (click)="deleteGuest(guest.id)">Usuń</button>
+        </div>
+      </div>
+
+      <div *ngIf="guest.editing" class="guest-edit mt-2">
+        <input [(ngModel)]="guest.fullName" class="form-control edit-input mb-2" placeholder="Imię i nazwisko">
+        <input type="number" [(ngModel)]="guest.count" class="form-control edit-input mb-2" placeholder="Liczba osób" min="1">
+        <button class="btn btn-sm btn-warning" (click)="saveGuest(i)">Zapisz</button>
+      </div>
+    </li>
+  </ul>
+</div>

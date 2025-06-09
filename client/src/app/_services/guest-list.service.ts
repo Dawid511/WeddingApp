@@ -37,3 +37,4 @@ export class GuestListService {
     return this.http.delete<void>(this.baseUrl + id, this.getHttpOptions());
   }
 }
+

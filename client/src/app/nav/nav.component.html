@@ -1,62 +1,52 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-beige">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/" routerLinkActive="active">WeddingPlaner</a>
-      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse"> -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-beige shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/" routerLinkActive="active">
+      <img src="icons/wedding-bells.png" alt="Logo" width="30" class="me-2">WeddingPlaner
+    </a>
 
-      
-        <!-- *ngIf="loggedIn" -->
-        <ul class="navbar-nav me-auto mb-2 mb-md-0" >
-          @if (accountService.currentUser()){
-            <li class="nav-item">
-              <a routerLink="/vendor" routerLinkActive="active" class="nav-link">Oferta</a>
-            </li>
-            <li class="nav-item">
-              <a routerLink="/vendor-add" routerLinkActive="active" class="nav-link">Dodawanie</a>
-            </li>
-          <li class="nav-item">
-            <a routerLink="/lists" routerLinkActive="active" class="nav-link">Lista gości</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/todo" routerLinkActive="active" class="nav-link">Lista zadań</a>
-          </li>
-          <li class="nav-item">
-            <a routerLink="/inspirations" routerLinkActive="active" class="nav-link">Inspiracje</a>
-          </li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        @if (accountService.currentUser()){
+          <li class="nav-item"><a routerLink="/vendor" routerLinkActive="active" class="nav-link">Oferta</a></li>
+          <li class="nav-item"><a routerLink="/guest" routerLinkActive="active" class="nav-link">Lista gości</a></li>
+          <li class="nav-item"><a routerLink="/todo" routerLinkActive="active" class="nav-link">Lista zadań</a></li>
+          <li class="nav-item"><a routerLink="/inspirations" routerLinkActive="active" class="nav-link">Inspiracje</a></li>
         }
-        </ul>
-      
+      </ul>
 
       @if (accountService.currentUser()){
-      <div dropdown class="dropdown">
-       <a dropdownToggle class="dropdown-toggle text-dark text-decoration-none">Witaj {{accountService.currentUser()?.username | titlecase}}</a> 
-        <div *dropdownMenu class="dropdown-menu">
-          <a class="dropdown-item">Edytuj profil</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" (click)="logout()">Wyloguj</a>
+        <div dropdown class="dropdown ms-lg-3">
+          <a dropdownToggle class="dropdown-toggle text-dark text-decoration-none">
+            <img src="icons/person-hearts.svg" alt="User" width="24" class="me-1">
+            Witaj {{ accountService.currentUser()?.username | titlecase }}
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item logou-button" (click)="logout()">Wyloguj</a>
+          </div>
         </div>
-      </div>
       }
-        
-   @if (!accountService.currentUser()) {
-  <div class="login-wrapper position-relative ms-auto me-3">
-  <button class="icon-button btn p-0 border-0 bg-transparent" (click)="toggleLoginForm()">
-    <img src="icons/person-hearts.svg" alt="Zaloguj się" width="32" height="32">
-  </button>
 
-  <!-- Formularz logowania rozwijany obok -->
-  <div *ngIf="showLoginForm" class="login-form-container position-absolute">
-    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off" class="bg-white p-3 shadow rounded d-flex flex-column gap-2" style="width: 300px;">
-      <input name="username" [(ngModel)]="model.username" class="form-control" placeholder="Login">
-      <input name="password" [(ngModel)]="model.password" class="form-control" placeholder="Hasło" type="password">
-      <button class="btn btn-warning w-100" type="submit">Zaloguj</button>
-    </form>
+      @if (!accountService.currentUser()) {
+        <div class="login-wrapper position-relative ms-auto">
+          <button class="icon-button btn p-0 border-0 bg-transparent" (click)="toggleLoginForm()" title="Zaloguj się">
+            <img src="icons/person-hearts.svg" alt="Zaloguj się" width="32" height="32">
+          </button>
+
+          <div *ngIf="showLoginForm" class="login-form-container position-absolute end-0 mt-2 z-3">
+            <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off"
+              class="bg-white p-3 shadow rounded d-flex flex-column gap-2" style="width: 300px;">
+              <input name="username" [(ngModel)]="model.username" class="form-control" placeholder="Login">
+              <input name="password" [(ngModel)]="model.password" class="form-control" placeholder="Hasło" type="password">
+              <button class="btn btn-warning w-100" type="submit">Zaloguj</button>
+            </form>
+          </div>
+        </div>
+      }
+    </div>
   </div>
-</div>
-}
- 
-      </div>
-    <!-- </div> -->
-  </nav>
+</nav>

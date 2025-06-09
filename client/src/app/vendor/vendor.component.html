@@ -12,11 +12,11 @@
       <p *ngIf="vendor.description"><strong>Opis:</strong> {{ vendor.description }}</p>
       <p *ngIf="vendor.phone"><strong>Telefon:</strong> {{ vendor.phone }}</p>
       <p *ngIf="vendor.email">
-        <strong>Email:</strong>
+        <strong>Email: </strong>
         <a href="mailto:{{ vendor.email }}">{{ vendor.email }}</a>
       </p>
       <p *ngIf="vendor.websiteUrl">
-        <strong>Strona:</strong>
+        <strong>Strona: </strong>
         <a href="{{ vendor.websiteUrl }}" target="_blank">{{ vendor.websiteUrl }}</a>
       </p>
     </div>
